@@ -18,7 +18,7 @@ io.on('connection', (sock) => {
   });
 
   sock.on('image', (image) => {
-    console.log('Received image ' + image);
+    console.log('Received image');
     io.to('receive').emit('send-image', image);
   });
 });
