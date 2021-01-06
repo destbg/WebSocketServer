@@ -4,7 +4,7 @@
 
   socket.emit('not-server');
 
-  socket.on('image', (image) => {
+  socket.on('send-image', (image) => {
     console.log(image);
     video_image.src = image;
   })
