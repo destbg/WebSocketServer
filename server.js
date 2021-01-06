@@ -11,11 +11,14 @@ app.use(helmet());
 app.use(express.static(path.join(__dirname, 'client')));
 
 io.on('connection', (sock) => {
+  console.log('A new connection');
+
   sock.on('not-server', () => {
     sock.join('receive');
   });
 
   sock.on('image', (image) => {
+    console.log('Received image ' + image);
     io.to('receive').emit('send-image', image);
   });
 });
