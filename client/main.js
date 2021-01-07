@@ -21,7 +21,8 @@
   await fetchStreams();
 
   async function fetchStreams() {
-    const streams = await fetch('/streams');
+    const streams = await fetch('/streams')
+      .then(res => res.json());
 
     list_of_streams.innerHTML = '';
     for (const stream of streams) {
