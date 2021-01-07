@@ -104,7 +104,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-# Copied files
-/src/lib/socket.io
-/src/lib/dompurify

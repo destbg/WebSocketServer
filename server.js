@@ -7,20 +7,36 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 4200;
 
+const streams = [];
+
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'client')));
 
 io.on('connection', (sock) => {
   console.log('A new connection');
+  let userRoom;
 
-  sock.on('not-server', () => {
-    sock.join('receive');
+  sock.on('create-stream', (room) => {
+    userRoom = room;
+    streams.push(userRoom);
+  });
+
+  sock.on('leave-streams', () => {
+    sock.leaveAll();
+  });
+
+  sock.on('join-stream', (room) => {
+    sock.join('receive ' + room);
   });
 
   sock.on('image', (image) => {
     console.log('Received image');
-    io.to('receive').emit('send-image', image);
+    io.to('receive ' + userRoom).emit('send-image', image);
   });
+});
+
+app.get('/streams', (_, res) => {
+  res.json(streams);
 });
 
 app.get('/*', (_, res) => {
