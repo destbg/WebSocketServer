@@ -38,6 +38,10 @@ io.on('connection', (sock) => {
     sock.join('receive ' + room);
   });
 
+  sock.on('audio', (audio) => {
+    io.to('receive ' + userRoom).emit('send-audio', audio);
+  })
+
   sock.on('image', (image) => {
     io.to('receive ' + userRoom).emit('send-image', image);
   });

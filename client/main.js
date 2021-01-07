@@ -20,8 +20,12 @@
   reload.addEventListener('click', async () => await fetchStreams());
 
   socket.on('send-image', (image) => {
-    console.log(image);
     video_image.src = 'data:image/jpeg;base64,' + image;
+  });
+
+  socket.on('send-audio', (audio) => {
+    const snd = new Audio("data:audio/wav;base64," + audio);
+    snd.play();
   });
 
   await fetchStreams();
