@@ -5,6 +5,8 @@
   const list_of_streams = document.getElementById('list-of-streams');
   const socket = io();
 
+  stream_div.style.display = 'hidden';
+
   leave_stream.addEventListener('click', async () => {
     socket.emit('leave-streams');
     await fetchStreams();
@@ -28,7 +30,7 @@
     for (const stream of streams) {
       const p = document.createElement('p');
       p.addEventListener('click', () => openStream(stream));
-      p.innerHTML = 'stream';
+      p.innerHTML = stream;
 
       list_of_streams.appendChild(p);
     }
