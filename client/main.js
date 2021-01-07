@@ -24,7 +24,7 @@
   });
 
   socket.on('send-audio', (audio) => {
-    const snd = new Audio("data:audio/wav;base64," + audio);
+    const snd = new Audio("data:audio/mp3;base64," + audio);
     snd.play();
   });
 
