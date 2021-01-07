@@ -18,7 +18,7 @@
 
   socket.on('send-image', (image) => {
     console.log(image);
-    video_image.src = image;
+    video_image.src = 'data:image/png;base64,' + image;
   });
 
   await fetchStreams();
