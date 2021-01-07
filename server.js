@@ -22,9 +22,9 @@ io.on('connection', (sock) => {
     }
   });
 
-  sock.on('create-stream', () => {
-    console.log('creating room ' + sock.id);
-    userRoom = sock.id;
+  sock.on('create-stream', (room) => {
+    console.log('creating room ' + room);
+    userRoom = room;
     streams.push(userRoom);
   });
 
