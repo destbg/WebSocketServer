@@ -36,7 +36,7 @@ io.on('connection', (sock) => {
 });
 
 app.get('/streams', (_, res) => {
-  res.json(streams);
+  res.json({streams});
 });
 
 app.get('/*', (_, res) => {

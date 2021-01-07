@@ -8,6 +8,7 @@
   stream_div.style.display = 'none';
 
   leave_stream.addEventListener('click', async () => {
+    console.log('leaving stream');
     socket.emit('leave-streams');
     await fetchStreams();
     video_image.src = '';
@@ -23,11 +24,13 @@
   await fetchStreams();
 
   async function fetchStreams() {
-    const streams = await fetch('/streams')
+    console.log('fetching streams');
+    const response = await fetch('/streams')
       .then(res => res.json());
 
     list_of_streams.innerHTML = '';
-    for (const stream of streams) {
+    for (const stream of response.streams) {
+      console.log(stream);
       const p = document.createElement('p');
       p.addEventListener('click', () => openStream(stream));
       p.innerHTML = stream;
