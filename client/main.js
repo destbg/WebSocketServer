@@ -5,14 +5,14 @@
   const list_of_streams = document.getElementById('list-of-streams');
   const socket = io();
 
-  stream_div.style.display = 'hidden';
+  stream_div.style.display = 'none';
 
   leave_stream.addEventListener('click', async () => {
     socket.emit('leave-streams');
     await fetchStreams();
     video_image.src = '';
     list_of_streams.style.display = 'block';
-    stream_div.style.display = 'hidden';
+    stream_div.style.display = 'none';
   });
 
   socket.on('send-image', (image) => {
@@ -37,7 +37,7 @@
   }
 
   async function openStream(stream) {
-    list_of_streams.style.display = 'hidden';
+    list_of_streams.style.display = 'none';
     stream_div.style.display = 'block';
 
     socket.emit('join-stream', stream);
