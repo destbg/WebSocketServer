@@ -32,11 +32,11 @@
     list_of_streams.innerHTML = '';
     for (const stream of response.streams) {
       console.log(stream);
-      const p = document.createElement('p');
-      p.addEventListener('click', () => openStream(stream));
-      p.innerHTML = stream;
+      const button = document.createElement('button');
+      button.addEventListener('click', () => openStream(stream));
+      button.innerHTML = stream;
 
-      list_of_streams.appendChild(p);
+      list_of_streams.appendChild(button);
     }
   }
 

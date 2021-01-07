@@ -14,17 +14,17 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 io.on('connection', (sock) => {
   console.log('A new connection');
-  let userRoom;
+  let userRoom = undefined;
 
   sock.on('disconnect', () => {
-    if (userRoom) {
-      streams = streams.filter(f => f !== userRoom);
+    if (userRoom != undefined) {
+      streams = streams.filter(f => f != userRoom);
     }
   });
 
-  sock.on('create-stream', (room) => {
-    console.log('creating room ' + room);
-    userRoom = room;
+  sock.on('create-stream', () => {
+    console.log('creating room ' + sock.id);
+    userRoom = sock.id;
     streams.push(userRoom);
   });
 
