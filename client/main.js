@@ -1,4 +1,5 @@
 (async () => {
+  const reload = document.getElementById('reload');
   const stream_div = document.getElementById('stream');
   const leave_stream = document.getElementById('leave-stream');
   const video_image = document.getElementById('video-stream');
@@ -15,6 +16,8 @@
     list_of_streams.style.display = 'block';
     stream_div.style.display = 'none';
   });
+
+  reload.addEventListener('click', async () => await fetchStreams());
 
   socket.on('send-image', (image) => {
     console.log(image);
