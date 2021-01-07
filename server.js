@@ -33,7 +33,6 @@ io.on('connection', (sock) => {
   });
 
   sock.on('image', (image) => {
-    console.log('Received image');
     io.to('receive ' + userRoom).emit('send-image', image);
   });
 });
