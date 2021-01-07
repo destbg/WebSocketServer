@@ -27,6 +27,7 @@
     console.log('fetching streams');
     const response = await fetch('/streams')
       .then(res => res.json());
+    console.log(response);
 
     list_of_streams.innerHTML = '';
     for (const stream of response.streams) {
