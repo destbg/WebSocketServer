@@ -17,15 +17,18 @@ io.on('connection', (sock) => {
   let userRoom;
 
   sock.on('create-stream', (room) => {
+    console.log('creating room ' + room);
     userRoom = room;
     streams.push(userRoom);
   });
 
   sock.on('leave-streams', () => {
+    console.log('leaving all rooms');
     sock.leaveAll();
   });
 
   sock.on('join-stream', (room) => {
+    console.log('joining stream ' + room);
     sock.join('receive ' + room);
   });
 
