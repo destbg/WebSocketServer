@@ -7,7 +7,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const PORT = process.env.PORT || 4200;
 
-const streams = [];
+let streams = [];
 
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'client')));
@@ -15,6 +15,12 @@ app.use(express.static(path.join(__dirname, 'client')));
 io.on('connection', (sock) => {
   console.log('A new connection');
   let userRoom;
+
+  sock.on('disconnect', () => {
+    if (userRoom) {
+      streams = streams.filter(f => f !== userRoom);
+    }
+  });
 
   sock.on('create-stream', (room) => {
     console.log('creating room ' + room);
