@@ -23,9 +23,9 @@
     video_image.src = 'data:image/jpeg;base64,' + image;
   });
 
-  socket.on('send-audio', (audio) => {
-    const snd = new Audio("data:audio/mp3;base64," + audio);
-    snd.play();
+  socket.on('send-audio', async (audio) => {
+    const snd = new Audio('data:audio/wav;base64,' + audio);
+    await snd.play();
   });
 
   await fetchStreams();
